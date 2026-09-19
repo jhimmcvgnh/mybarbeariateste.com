@@ -1,0 +1,434 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --premium-black: #0c0c0c;
+    --premium-gold: #c5a059;
+    --premium-white: #ffffff;
+    --glass-bg: rgba(12, 12, 12, 0.85);
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset and Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* --- CONSISTENT PREMIUM NAVBAR (From Main Page) --- */
+#custom-glass-navbar {
+    position: fixed !important;
+    top: 20px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 95% !important;
+    max-width: 1200px !important;
+    z-index: 99999 !important;
+    /* DESIGN FIEL À IMAGEM — Formato Pílula + Cor Café Suave */
+    background: rgba(22, 20, 19, 0.85) !important;
+    backdrop-filter: blur(25px) saturate(160%) !important;
+    -webkit-backdrop-filter: blur(25px) saturate(160%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5) !important;
+    border-radius: 60px !important;
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+}
+
+#custom-glass-navbar.scrolled-navbar {
+    top: 10px !important;
+    width: 92% !important;
+    background: rgba(18, 16, 15, 0.92) !important;
+    backdrop-filter: blur(40px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(40px) saturate(180%) !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 15px 60px rgba(0, 0, 0, 0.6) !important;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+}
+
+#custom-glass-navbar.scrolled-navbar .navbar-container {
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+}
+
+.nav-logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.nav-logo img {
+    height: 48px;
+    width: auto;
+    object-fit: contain;
+    transition: opacity 0.3s ease;
+}
+
+.nav-links ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.nav-links li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-transform: none; /* Resetting previous uppercase if any */
+    letter-spacing: normal;
+}
+
+.nav-links li a:hover,
+.nav-links li:hover > a {
+    color: var(--premium-gold);
+}
+
+/* Dropdown Styles */
+.nav-links li.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 15px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(60, 60, 60, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 16px;
+    padding: 15px 0 !important;
+    min-width: 250px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    flex-direction: column !important;
+    gap: 0 !important;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.nav-links li.dropdown:hover > .dropdown-menu,
+.nav-links li.dropdown.active > .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+}
+
+.dropdown-menu > li {
+    width: 100%;
+}
+
+.dropdown-menu > li > a {
+    padding: 12px 20px;
+    font-size: 15px;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Sub dropdown */
+.sub-dropdown-menu {
+    display: none !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    padding: 0 !important;
+    background: rgba(0,0,0,0.2) !important;
+}
+
+.dropdown-group.active .sub-dropdown-menu {
+    display: flex !important;
+}
+
+.sub-dropdown-menu li a {
+    padding: 10px 20px 10px 30px !important;
+    font-size: 14px !important;
+    opacity: 0.8 !important;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-phone {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.phone-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.nav-book-btn {
+    background: #ffffff;
+    color: #000000;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 10px 22px;
+    border-radius: 50px;
+    transition: background 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.nav-book-btn:hover {
+    background: var(--premium-gold);
+    color: #000;
+}
+
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* --- RESTORED ORIGINAL STYLES --- */
+
+.elementor-2942 .elementor-element.elementor-element-a4e792a {
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: space-between;
+    padding: 200px 10%;
+    background: linear-gradient(90deg, #000 40%, rgba(14, 57, 93, 0.2) 80%), url('../images/LoMax_Real_Estate-15.webp') no-repeat center center;
+    background-size: cover;
+}
+
+.elementor-element-e14e0d1 h1 {
+    font-family: 'Ibarra Real Nova', serif;
+    font-size: clamp(3.5rem, 10vw, 6rem);
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.elementor-element-20febcb p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    color: #ddd;
+    max-width: 550px;
+    margin-bottom: 30px;
+}
+
+/* Icon Box Restoration */
+.elementor-widget-icon-box {
+    margin-bottom: 15px;
+}
+
+.elementor-icon-box-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.elementor-icon {
+    width: 32px;
+    height: 32px;
+    border: 3px solid var(--premium-gold);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--premium-gold);
+    font-size: 14px;
+}
+
+.elementor-icon-box-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--premium-gold);
+    margin: 0;
+}
+
+/* Button Restoration */
+.elementor-button {
+    display: inline-flex;
+    align-items: center;
+    background: var(--premium-gold);
+    color: #000;
+    padding: 15px 40px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 700;
+    gap: 10px;
+    transition: var(--transition-smooth);
+    margin-top: 20px;
+}
+
+.elementor-button:hover {
+    background: #fff;
+    color: #000;
+}
+
+/* Gallery Section Background */
+.elementor-element-1f25d30 {
+    padding: 100px 5%;
+    background: url('../images/Background_stone.webp') no-repeat center center;
+    background-size: cover;
+    text-align: center;
+}
+
+.elementor-element-f93f0f9 h2 {
+    font-family: 'Ibarra Real Nova', serif;
+    font-size: 3.5rem;
+    color: var(--premium-gold);
+    margin-bottom: 10px;
+}
+
+.elementor-element-1c50179 p {
+    font-size: 1.2rem;
+    color: #fff;
+    margin-bottom: 50px;
+}
+
+/* Expanding Gallery Logic */
+.expand-gallery {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.expand-gallery > .e-con {
+    flex: 1;
+    height: 500px;
+    transition: flex 0.6s cubic-bezier(0.25, 1, 0.5, 1), border-radius 0.6s ease;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 30px;
+    background-size: cover;
+    background-position: center;
+}
+
+.expand-gallery > .e-con:hover {
+    flex: 4;
+    border-radius: 30px;
+}
+
+.expand-gallery > .e-con::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.9) 100%);
+    z-index: 1;
+    transition: opacity 0.4s ease;
+}
+
+.expand-gallery h3 {
+    position: relative;
+    z-index: 2;
+    font-family: 'Ibarra Real Nova', serif;
+    font-size: 1.4rem;
+    color: #fff;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.5s ease;
+}
+
+.expand-gallery > .e-con:hover h3 {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.2s;
+}
+
+/* Instagram Button - Design Black & White */
+.elementor-element-bfad14e .elementor-button {
+    background: #000000 !important;
+    border: 1px solid #000000 !important;
+    color: #ffffff !important;
+    border-radius: 50px !important;
+    margin-top: 50px !important;
+    padding: 12px 35px !important;
+    font-weight: 700 !important;
+    transition: var(--transition-smooth);
+}
+
+.elementor-element-bfad14e .elementor-button:hover {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border-color: #ffffff !important;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .expand-gallery {
+        flex-direction: column;
+        height: auto;
+    }
+    .expand-gallery > .e-con {
+        flex: none;
+        width: 100% !important;
+        height: 300px;
+        margin-bottom: 10px;
+    }
+    .expand-gallery h3 {
+        opacity: 1;
+        transform: none;
+    }
+    .elementor-2942 .elementor-element.elementor-element-a4e792a {
+        padding: 150px 20px;
+    }
+    .mobile-menu-toggle {
+        display: none !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .premium-header .container {
+        padding: 0 20px;
+    }
+    .nav-links {
+        display: none; /* Can add a mobile menu later if needed */
+    }
+    .mobile-menu-toggle {
+        display: none !important;
+    }
+}

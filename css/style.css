@@ -1,0 +1,383 @@
+/*
+Theme Name: Hello Elementor Child
+Theme URI: https://elementor.com/hello-theme/?utm_source=wp-themes&utm_campaign=theme-uri&utm_medium=wp-dash
+Template: hello-elementor
+Author: Elementor Team
+Author URI: https://elementor.com/?utm_source=wp-themes&utm_campaign=author-uri&utm_medium=wp-dash
+Description: Hello Elementor is a lightweight and minimalist WordPress theme that was built specifically to work seamlessly with the Elementor site builder plugin. The theme is free, open-source, and designed for users who want a flexible, easy-to-use, and customizable website. The theme, which is optimized for performance, provides a solid foundation for users to build their own unique designs using the Elementor drag-and-drop site builder. Its simplicity and flexibility make it a great choice for both beginners and experienced Web Creators.
+Tags: accessibility-ready,flexible-header,custom-colors,custom-menu,custom-logo,featured-images,rtl-language-support,threaded-comments,translation-ready
+Version: 3.4.5.1764965805
+Updated: 2025-12-05 20:16:45
+
+*/
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* NAVBAR GLASSMORPHISM CUSTOM */
+#custom-glass-navbar {
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 40px);
+    max-width: 1400px;
+    z-index: 99999;
+    background: rgba(80, 80, 80, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 50px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.1);
+    font-family: Arial, Helvetica, sans-serif;
+    transition: all 0.3s ease;
+}
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 24px;
+}
+.nav-logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+.nav-logo img {
+    height: 48px;
+    width: auto;
+    object-fit: contain;
+    transition: opacity 0.3s ease;
+}
+.nav-links {
+    margin: 0;
+    padding: 0;
+}
+.nav-links ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+.nav-links li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.nav-links li a:hover,
+.nav-links li:hover > a {
+    opacity: 0.7;
+}
+
+/* Dropdown */
+.nav-links li.dropdown {
+    position: relative;
+}
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 15px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(60, 60, 60, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 16px;
+    padding: 15px 0 !important;
+    min-width: 250px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    flex-direction: column !important;
+    gap: 0 !important;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+.nav-links li.dropdown:hover > .dropdown-menu,
+.nav-links li.dropdown.active > .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+}
+.dropdown-menu > li {
+    width: 100%;
+}
+.dropdown-menu > li > a {
+    padding: 12px 20px;
+    font-size: 15px;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+    opacity: 1 !important;
+}
+.dropdown-menu > li > a:hover {
+    background: rgba(255,255,255,0.1);
+}
+/* Sub dropdown */
+.sub-dropdown-menu {
+    display: none !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    padding: 0 !important;
+    background: rgba(0,0,0,0.2) !important;
+}
+.dropdown-group.active .sub-dropdown-menu {
+    display: flex !important;
+}
+.sub-dropdown-menu li a {
+    padding: 10px 20px 10px 30px !important;
+    font-size: 14px !important;
+    opacity: 0.8 !important;
+    box-sizing: border-box;
+}
+.sub-dropdown-menu li a:hover {
+    background: rgba(255,255,255,0.1);
+    opacity: 1 !important;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.nav-phone {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+}
+.nav-phone:hover {
+    opacity: 0.8;
+}
+.phone-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    color: #ffffff;
+    font-size: 14px;
+}
+.nav-book-btn {
+    background: #ffffff;
+    color: #000000;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 10px 22px;
+    border-radius: 50px;
+    transition: background 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.nav-book-btn:hover {
+    background: #f0f0f0;
+}
+.mobile-menu-toggle {
+    display: none;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #ffffff;
+    font-size: 20px;
+    cursor: pointer;
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.25s ease;
+    flex-shrink: 0;
+}
+.mobile-menu-toggle:hover {
+    background: rgba(255,255,255,0.22);
+}
+
+/* Overlay escuro atrás do drawer */
+.mobile-nav-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 99997;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    animation: fadeOverlay 0.3s ease forwards;
+}
+.mobile-nav-overlay.active {
+    display: block;
+}
+@keyframes fadeOverlay {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+body { padding-top: 0 !important; }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+
+    /* === DRAWER LATERAL === */
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -320px;
+        width: 300px;
+        max-width: 85vw;
+        height: 100dvh;
+        background: rgba(22, 20, 19, 0.97);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-left: 1px solid rgba(255,255,255,0.1);
+        padding: 80px 24px 40px;
+        display: flex;
+        flex-direction: column;
+        z-index: 99998;
+        box-sizing: border-box;
+        transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow-y: auto;
+    }
+    .nav-links.active {
+        right: 0;
+    }
+
+    /* Botão fechar (X) dentro do drawer */
+    .nav-links::before {
+        content: '\00D7';
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 28px;
+        color: rgba(255,255,255,0.7);
+        cursor: pointer;
+        line-height: 1;
+        pointer-events: none;
+    }
+
+    .nav-links ul {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        gap: 4px;
+    }
+    .nav-links li {
+        width: 100%;
+    }
+    .nav-links li a {
+        font-size: 16px;
+        padding: 12px 8px;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+        width: 100%;
+        box-sizing: border-box;
+        justify-content: space-between;
+    }
+    .nav-links li:last-child a {
+        border-bottom: none;
+    }
+
+    /* Dropdown mobile */
+    .dropdown-menu {
+        position: static;
+        transform: none;
+        box-shadow: none;
+        background: rgba(255,255,255,0.04);
+        display: none !important;
+        opacity: 1;
+        visibility: visible;
+        width: 100%;
+        padding: 4px 0 4px 12px !important;
+        border: none;
+        border-radius: 8px;
+        margin-top: 4px;
+    }
+    .nav-links li.dropdown.active > .dropdown-menu {
+        display: flex !important;
+    }
+
+    .nav-phone .phone-number {
+        display: none;
+    }
+    .mobile-menu-toggle {
+        display: none !important;
+    }
+    .navbar-container {
+        padding: 10px 15px;
+    }
+}
+@media (max-width: 768px) {
+    /* Navbar Mobile */
+    .nav-phone { display: none !important; }
+    .navbar-container { padding: 8px 15px !important; }
+    .nav-logo img { height: 32px !important; }
+    .nav-right { gap: 12px !important; }
+    .nav-book-btn {
+        padding: 8px 16px !important;
+        font-size: 14px !important;
+        background: #ffffff !important;
+        color: #000000 !important;
+        border-radius: 10px !important; 
+    }
+    .mobile-menu-toggle { display: none !important; }
+
+    /* Hero Section Mobile */
+    .elementor-element-aa4e105 .elementor-heading-title {
+        text-align: center !important;
+        font-size: 46px !important;
+        line-height: 1.1 !important;
+        padding-bottom: 15px !important;
+    }
+    .elementor-element-aa4e105 .elementor-widget-text-editor {
+        text-align: center !important;
+        font-size: 16px !important;
+        padding-bottom: 25px !important;
+    }
+    .elementor-element-aa4e105 .elementor-button {
+        width: 100% !important;
+        justify-content: center !important;
+        background: #ffffff !important;
+        color: #000000 !important;
+        border-radius: 12px !important;
+        padding: 16px 24px !important;
+        font-size: 16px !important;
+        font-weight: bold !important;
+    }
+    .elementor-element-aa4e105 .elementor-button-icon {
+        order: 2;
+        margin-left: 10px;
+    }
+}
+
+/* CUSTOM SCROLLBAR (Linha fina) */
+::-webkit-scrollbar {
+    width: 4px; /* Largura bem fina, parecendo uma linha */
+    background: transparent; /* Fundo transparente */
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.5); /* Cor da linha (branca com transparência) */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+/* Ocultar barra padrão no Firefox */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.5) transparent;
+}

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Agendamento - LoMax Barbers</title>
+    <script>
+        // Redireciona imediatamente para a página principal abrindo o pop-up modal oficial
+        (function() {
+            var params = new URLSearchParams(window.location.search);
+            params.set('openBooking', 'true');
+            window.location.replace('../?' + params.toString());
+        })();
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-inner">
+            <div class="header-left">
+                <a href="../"><img src="../images/LoMax-Barbers.png" alt="LoMax Barbers" class="app-logo"></a>
+            </div>
+            <div class="header-right">
+                <button class="menu-toggle" aria-label="Menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="app-container">
+        <!-- Main Content Area (Steps) -->
+        <div class="app-content">
+            <section class="step-container">
+                
+                <!-- Step 1: Services -->
+                <div class="step active" id="step1">
+                    <h1 class="step-title">Escolha os serviços</h1>
+                    <div class="service-list" id="serviceList">
+                        <!-- Dynamic Services will load here -->
+                    </div>
+                </div>
+
+                <!-- Step 2: Professionals -->
+                <div class="step" id="step2">
+                    <h1 class="step-title">Escolha o profissional</h1>
+                    <div class="professional-grid" id="staffList">
+                        <!-- Dynamic Staff will load here -->
+                    </div>
+                </div>
+
+                <!-- Step 3: Date & Time -->
+                <div class="step" id="step3">
+                    <div class="calendar-section">
+                        <div class="calendar-header">
+                            <h1 id="monthYearDisplay"></h1>
+                            <div class="calendar-controls">
+                                <button onclick="changeMonth(-1)" class="nav-btn" aria-label="Mês anterior"><i class="fas fa-chevron-left"></i></button>
+                                <button onclick="changeMonth(1)" class="nav-btn" aria-label="Próximo mês"><i class="fas fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                        <div class="calendar-tape" id="calendarTape">
+                            <!-- Horizontal calendar tape -->
+                        </div>
+                    </div>
+
+                    <div class="time-selection-section">
+                        <p class="timezone-label">Horários disponíveis para atendimento (Horário de Brasília)</p>
+                        <div class="time-grid" id="timeGrid">
+                            <div class="time-column">
+                                <span class="time-label">Manhã</span>
+                                <div class="time-slots" id="morningSlots"></div>
+                            </div>
+                            <div class="time-column">
+                                <span class="time-label">Tarde</span>
+                                <div class="time-slots" id="afternoonSlots"></div>
+                            </div>
+                            <div class="time-column">
+                                <span class="time-label">Noite</span>
+                                <div class="time-slots" id="eveningSlots"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Contact/Review -->
+                <div class="step" id="step4">
+                    <h1 class="step-title">Confirme seus dados</h1>
+                    <p class="hold-message">Horário reservado por <span id="timer">10:00</span></p>
+                    
+                    <div class="contact-form-container">
+                        <div class="form-section">
+                            <span class="section-title">Informações de contato</span>
+                            <div class="input-group">
+                                <div class="country-code">BR +55 <i class="fas fa-chevron-down"></i></div>
+                                <input type="tel" placeholder="Telefone / WhatsApp (DDD + Número) *" class="main-input" id="clientPhone" required>
+                            </div>
+                            <p class="disclaimer">Ao fornecer seu telefone, você receberá lembretes e a confirmação do seu agendamento.</p>
+                            <div class="input-row">
+                                <input type="text" placeholder="Nome *" class="main-input" id="clientFirstName" required>
+                                <input type="text" placeholder="Sobrenome" class="main-input" id="clientLastName">
+                            </div>
+                            <input type="email" placeholder="Seu melhor e-mail (opcional)" class="main-input" id="clientEmail">
+                            
+                            <div class="input-group" style="margin-top: 15px;">
+                                <label style="font-size: 0.85rem; font-weight: 600; display:block; margin-bottom:6px; color:#333;">Foto de Referência / Inspiração (opcional)</label>
+                                <input type="file" id="clientRefFile" accept="image/*" class="main-input" style="padding: 8px;">
+                                <input type="url" id="imageReference" placeholder="Ou cole um link de inspiração (Instagram, Pinterest)" class="main-input" style="margin-top: 6px;">
+                            </div>
+
+                            <div style="margin-top: 20px;">
+                                <span class="section-title">Forma de Pagamento</span>
+                                <div style="display: flex; gap: 12px; margin-top: 8px;">
+                                    <label style="flex:1; border: 1.5px solid #000; border-radius: 8px; padding: 12px; cursor: pointer; display:flex; align-items:center; gap: 8px; font-weight: 600;">
+                                        <input type="radio" name="paymentType" value="presencial" checked>
+                                        <span>Presencial (no Local)</span>
+                                    </label>
+                                    <label style="flex:1; border: 1.5px solid #eaeaea; border-radius: 8px; padding: 12px; cursor: pointer; display:flex; align-items:center; gap: 8px; font-weight: 600;">
+                                        <input type="radio" name="paymentType" value="pix">
+                                        <span>⚡ PIX</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 5: Confirmação / Sucesso (Card na Tela) -->
+                        <div class="step-content" id="step5" style="text-align: center; padding: 30px 10px;">
+                            <div style="width: 70px; height: 70px; border-radius: 50%; background: #22c55e; color: #fff; font-size: 32px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; box-shadow: 0 4px 14px rgba(34, 197, 94, 0.35);">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; color: #111;">Agendamento Confirmado!</h2>
+                            <p style="color: #666; font-size: 0.95rem; margin-bottom: 24px;">Seu horário foi reservado com sucesso no sistema.</p>
+                            
+                            <div id="bookingSuccessCard" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; text-align: left; max-width: 440px; margin: 0 auto 24px auto;">
+                                <!-- Dynamic details -->
+                            </div>
+
+                            <a href="../index.html" style="display: inline-block; background: #000; color: #fff; text-decoration: none; padding: 12px 28px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; transition: opacity 0.2s;">
+                                Voltar para o Início
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </section>
+        </div>
+
+        <!-- Sidebar Summary -->
+        <aside class="app-sidebar">
+            <div class="summary-wrapper" id="summaryWrapper">
+                <div class="summary-header">
+                    <h2 class="summary-title">Resumo do agendamento</h2>
+                    <button class="summary-expand-btn"><i class="fas fa-chevron-up"></i></button>
+                </div>
+
+                <div class="summary-body">
+                    <div class="summary-profile-group">
+                        <div class="avatar-stack" id="avatarStack">
+                            <!-- Dynamic Avatars -->
+                        </div>
+                        <div class="summary-overview-text">
+                            <span id="serviceCountText">0 serviços selecionados</span>
+                            <span id="totalAndDurationText">R$ 0,00 • 0 min</span>
+                        </div>
+                    </div>
+
+                    <div class="summary-tree" id="summaryTree">
+                        <!-- Tree view of services/staff -->
+                    </div>
+
+                    <div class="summary-footer-date" id="summaryFooterDate" style="display:none;">
+                        <div class="date-icon-box">
+                            <i class="far fa-calendar"></i>
+                        </div>
+                        <div class="date-text-box">
+                            <p id="finalDateStr"></p>
+                            <p id="finalTimeRange"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="summary-actions">
+                    <button class="btn-primary" id="mainActionBtn" onclick="nextStep()" disabled>Avançar</button>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Navigation Footer (Mobile) -->
+    <footer class="app-footer-nav" style="display:none;">
+        <button class="btn-primary-mobile" onclick="nextStep()">Avançar</button>
+    </footer>
+
+    <!-- Supabase SDK & Centralized Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase-client.js?v=sb_v1"></script>
+    <script src="./js/script.js?v=sb_v1"></script>
+</body>
+</html>
