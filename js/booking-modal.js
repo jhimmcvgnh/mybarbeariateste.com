@@ -720,6 +720,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             btnConfirm.innerHTML = originalText;
             goToPhase(6);
+            window.dispatchEvent(new CustomEvent('barberBookingConfirmed'));
             return;
 
         } catch (err) {
