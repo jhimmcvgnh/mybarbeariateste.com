@@ -7,7 +7,7 @@
   'use strict';
 
   const TARGET_URL = 'https://quizz-page-fist.vercel.app/';
-  const THREE_MINUTES_MS = 3 * 60 * 1000; // 3 minutos exatos (180.000 ms)
+  const POPUP_INTERVAL_MS = 90 * 1000; // 1:30 minutos exatos (90 segundos = 90.000 ms)
 
   // Ícone de Caneta Minimalista e Elegante (Feather / Lucide Edit Pen, Detalhes em Preto)
   const PEN_ICON_SVG = `
@@ -338,25 +338,26 @@
       }
     }, true);
 
-    // TEMPORIZADOR DE 3 MINUTOS:
+    // TEMPORIZADOR DE 1:30 MINUTOS (90 SEGUNDOS):
     // NÃO APARECE AO ENTRAR NEM AO RECARREGAR.
-    // O pop-up só aparece pela 1ª vez após 3 minutos (180.000 ms),
-    // e depois continuará aparecendo a cada 3 minutos!
+    // O pop-up só aparece pela 1ª vez após 1 minuto e 30 segundos (90.000 ms),
+    // e depois continuará aparecendo a cada 1:30 minutos!
     setTimeout(function () {
       showPromoModal();
-      // Após os primeiros 3 minutos, agenda para continuar aparecendo a cada 3 minutos
-      setInterval(showPromoModal, THREE_MINUTES_MS);
-    }, THREE_MINUTES_MS);
+      // Após os primeiros 1:30 minutos, agenda para continuar aparecendo a cada 1:30 minutos
+      setInterval(showPromoModal, POPUP_INTERVAL_MS);
+    }, POPUP_INTERVAL_MS);
 
-    // Helpers para testes imediatos sem ter que esperar 3 minutos
+    // Helpers para testes imediatos sem ter que esperar 1:30 min
     window.openPromoPopup = showPromoModal;
     window.closePromoPopup = hidePromoModal;
-    window.simulate3Minutes = function () {
-      console.log('⏰ Simulando passagem de 3 minutos...');
+    window.simulate1Min30 = function () {
+      console.log('⏰ Simulando passagem de 1:30 minutos...');
       showPromoModal();
     };
-    window.simulate5Minutes = window.simulate3Minutes;
-    window.simulate10Minutes = window.simulate3Minutes;
+    window.simulate3Minutes = window.simulate1Min30;
+    window.simulate5Minutes = window.simulate1Min30;
+    window.simulate10Minutes = window.simulate1Min30;
     window.triggerBookingConfirmed = function () {
       console.log('🧪 Simulando confirmação de agendamento (pop-up em 5s)...');
       triggerAfterBooking(5000);
